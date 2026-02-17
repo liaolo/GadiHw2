@@ -1,0 +1,31 @@
+﻿@using MySql.Data.MySqlClient;
+@page "/3"
+
+<input type="text" @bind="name" placeholder="Enter you name" />
+<input type="password" @bind="pass" placeholder="Enter you password" />
+<input type="text" @bind="email" placeholder="Enter you email" />
+<input type="text" @bind="username" placeholder="Enter you username" />
+<button type="button" value="great me" onclick="insert"/>
+
+<p></p>
+
+@code
+{
+    string name = "";
+    string pass = "";
+    string email = "";
+    string username = "";
+    void INSERT()
+    {
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = "server=localhost;user id =root;password=josh17rog;database=gadhw1";
+        con.Open();
+
+        string sql = $"INSERT INTO `gadhw1`.`userdatabase` (`UserName`, `userPasswordl`, `UserEmail`) VALUES ('{username}', '{pass}', '{email}');";
+        MySqlCommand cmd = new MySqlCommand();
+        cmd.Connection = con;
+        cmd.CommandText = sql;
+        cmd.ExecuteNonQuery();
+        
+    }
+}

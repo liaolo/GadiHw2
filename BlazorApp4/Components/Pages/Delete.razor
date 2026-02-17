@@ -1,0 +1,20 @@
+﻿@using MySql.Data.MySqlClient;
+@page "/1"
+
+
+
+@code
+{
+    void DELETE()
+    {
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = "server=localhost;user id =root;password=josh17rog;database=gadhw1";
+        con.Open();
+
+        string Sql2 = $"DELETE FROM `gadhw1`.`userdatabase` WHERE(`userId` = '2');";
+        MySqlCommand cmd2 = new MySqlCommand();
+        cmd2.Connection = con;
+        cmd2.CommandText = Sql2;
+        cmd2.ExecuteNonQuery();
+    }
+}
