@@ -1,28 +1,32 @@
 ﻿@using MySql.Data.MySqlClient;
 @page "/2"
 
-<input type="text" @bind="name" placeholder="Enter you name" />
+<input type="text" @bind="userid" placeholder="Enter you userid" />
 <input type="password" @bind="pass" placeholder="Enter you password" />
 <input type="text" @bind="email" placeholder="Enter you email" />
 <input type="text" @bind="username" placeholder="Enter you username" />
-<button type="button" value="great me" onclick="insert" />
+<button @onclick="UPDATE">"UPDATE"</button>
+<p>@message</p>
 
 @code
 {
-    string name = "";
+    string userid = "";
     string pass = "";
     string email = "";
     string username = "";
+    string message = "";
     void UPDATE()
     {
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = "server=localhost;user id =root;password=josh17rog;database=gadhw1";
         con.Open();
 
-        string Sql3 = $"UPDATE `gadhw1`.`userdatabase` SET `UserPassword` = '1777' WHERE (`userId` = '2');";
+        string Sql3 = $"UPDATE `gadhw1`.`userdatabase` SET `UserPassword` = '{pass}', `UserEmail` = '{email}' WHERE(`IdUsers` = '{userid}')";
+
         MySqlCommand cmd3 = new MySqlCommand();
         cmd3.Connection = con;
         cmd3.CommandText = Sql3;
-        cmd3.ExecuteNonQuery();
+        int num = cmd3.ExecuteNonQuery();
+        message=num>0? "Succsesful" : "No nO"; 
     }
 }

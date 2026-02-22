@@ -1,20 +1,27 @@
 ﻿@using MySql.Data.MySqlClient;
 @page "/1"
 
+<input type="password" @bind="userid" placeholder="Enter you userid" />
+<button @onclick="DELETE">sumbit</button>
+<p>@Message</p>
 
 
 @code
 {
+    string userid = "";
+    string Message = "";
+
     void DELETE()
     {
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = "server=localhost;user id =root;password=josh17rog;database=gadhw1";
         con.Open();
 
-        string Sql2 = $"DELETE FROM `gadhw1`.`userdatabase` WHERE(`userId` = '2');";
+        string Sql2 = $"DELETE FROM `gadhw1`.`userdatabase` WHERE(`userId` = '{userid}');";
         MySqlCommand cmd2 = new MySqlCommand();
         cmd2.Connection = con;
         cmd2.CommandText = Sql2;
-        cmd2.ExecuteNonQuery();
+        int num = cmd2.ExecuteNonQuery();
+        userid = num > 0 ? "Succesful" : "No No";
     }
 }
