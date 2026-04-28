@@ -1,0 +1,56 @@
+﻿@using MySql.Data.MySqlClient;
+@page "/AssigmentSelect"
+
+<div class="page4-wrap">
+    <div class="page4-header">
+        <div class="page4-badge">USERS</div>
+        <h1 class="page4-title">Users Table</h1>
+        <p class="page4-sub">Live data from MySQL</p>
+    </div>
+
+    <div class="page4-card">
+        <table class="page4-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>EMAIL</th>
+                </tr>
+            </thead>
+            <tbody>
+                @while (reader.Read())
+                {
+                    string Aname = reader["AssigmentName"].ToString();
+                    string Asubject = reader["AssigmentsSubject"].ToString();
+                    string Ddate = reader["AssignmentsDueDate"].ToString();
+                    string Anotes = reader["AssignmentsNotes"].ToString();
+
+                    <tr>
+                        <td>@Aname</td>
+                        <td>@Asubject</td>
+                        <td>@Ddate</td>
+                        <td>@Anotes</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@code
+{
+    MySqlDataReader reader;
+    protected override void OnInitialized()
+    {
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = "server=localhost;user id =root;password=josh17rog;database=gadhw1";
+        con.Open();
+
+        MySqlCommand cmd4 = new MySqlCommand();
+        cmd4.Connection = con;
+        string sql4 = "SELECT * FROM `gadhw1`.`assigments`;";
+        cmd4.CommandText = sql4;
+        reader = cmd4.ExecuteReader();
+    }
+}

@@ -1,0 +1,145 @@
+﻿@using MySql.Data.MySqlClient;
+@page "/AssigmentInsert"
+
+<input type="text" @bind="AName" placeholder="Enter you Assigment Name" />
+<input type="text" @bind="ASubject" placeholder="Enter you Subject Name" />
+<input type="text" @bind="Ddate" placeholder="Enter your assigments Due date" />
+<input type="text" @bind="Ddate" placeholder="Enter notes" />
+<input type="text" @bind="Ddate" placeholder="Enter notes" />
+<button @onclick="INSERT">"INSERT"</button>
+<p>@Message</p>
+
+@code
+{
+    string AName = "";
+    string ASubject = "";
+    string Ddate = "";
+    string ANotes = "";
+    string Message = "";
+    void INSERT()
+    {
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = "server=localhost;user id =root;password=josh17rog;database=gadhw1";
+        con.Open();
+
+        string sql = $"INSERT INTO `gadhw1`.`assigments` (`AssigmentName`, `AssigmentsSubject`, `AssigmentsDueDate`,`AssigmentsNotes`) VALUES ('{AName}', '{ASubject}', '{Ddate}', '{ANotes});";
+        MySqlCommand cmd = new MySqlCommand();
+        cmd.Connection = con;
+        cmd.CommandText = sql;
+        int num = cmd.ExecuteNonQuery();
+        if (num > 0)
+        {
+            Message = "Worked";
+        }
+        else
+        {
+            Message = "No work";
+        }
+    }
+}
+
+<style>
+    /* Scoped via :has() to avoid affecting other pages */
+    body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) {
+        --bg1: #07101e;
+        --bg2: #081b16;
+        --cardBorder: rgba(255, 255, 255, 0.14);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.65);
+        --radius: 18px;
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 56px 16px;
+        color: var(--text);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+        background: radial-gradient(900px 540px at 18% 18%, rgba(0, 255, 170, 0.18), transparent 60%), radial-gradient(700px 420px at 82% 22%, rgba(0, 200, 255, 0.16), transparent 55%), linear-gradient(155deg, var(--bg1), var(--bg2));
+    }
+
+        body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) * {
+            box-sizing: border-box;
+        }
+
+        body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"]))::before {
+            content: "CREATE USER";
+            position: fixed;
+            top: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            letter-spacing: 0.28em;
+            font-weight: 800;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.72);
+            text-shadow: 0 0 22px rgba(0, 255, 170, 0.35);
+            z-index: 2;
+        }
+
+        /* Layout: stack the controls nicely even without wrapper div */
+        body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) input,
+        body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) button,
+        body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) p {
+            width: min(520px, 92vw);
+            display: block;
+        }
+
+        body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) input {
+            margin: 10px 0 0;
+            padding: 14px 14px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(10, 18, 24, 0.55);
+            color: var(--text);
+            outline: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+        }
+
+            body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) input:first-of-type {
+                margin-top: 0;
+            }
+
+            body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) input::placeholder {
+                color: rgba(255, 255, 255, 0.45);
+            }
+
+            body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) input:focus {
+                border-color: rgba(0, 255, 170, 0.55);
+                box-shadow: 0 0 0 3px rgba(0, 255, 170, 0.14), 0 14px 35px rgba(0,0,0,0.35);
+                transform: translateY(-1px);
+            }
+
+        body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) button {
+            margin-top: 14px;
+            padding: 12px 14px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(255,255,255,0.18);
+            cursor: pointer;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.92);
+            background: linear-gradient(135deg, rgba(0, 255, 170, 0.90), rgba(0, 200, 255, 0.88));
+            box-shadow: 0 14px 34px rgba(0, 255, 170, 0.16), 0 18px 46px rgba(0, 200, 255, 0.14);
+            transition: transform 140ms ease, filter 140ms ease;
+        }
+
+            body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) button:hover {
+                transform: translateY(-2px);
+                filter: brightness(1.05);
+            }
+
+            body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) button:active {
+                transform: translateY(0px) scale(0.99);
+            }
+
+        body:has(input[placeholder="Enter you username"]):not(:has(input[placeholder="Enter you userid"])) p {
+            margin: 12px 0 0;
+            padding: 10px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(0,0,0,0.25);
+            color: var(--muted);
+            text-align: center;
+            overflow-wrap: anywhere;
+        }
+</style>
