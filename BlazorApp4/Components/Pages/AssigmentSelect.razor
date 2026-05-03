@@ -20,6 +20,7 @@
             <tbody>
                 @while (reader.Read())
                 {
+                    string Aid = reader["idAssignment"].ToString();
                     string Aname = reader["AssigmentName"].ToString();
                     string Asubject = reader["AssigmentsSubject"].ToString();
                     string Ddate = reader["AssignmentsDueDate"].ToString();
@@ -27,6 +28,7 @@
 
                     <tr>
                         <td>@Aname</td>
+                        <td>@Aid</td>
                         <td>@Asubject</td>
                         <td>@Ddate</td>
                         <td>@Anotes</td>

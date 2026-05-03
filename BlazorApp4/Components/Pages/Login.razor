@@ -1,3 +1,74 @@
-﻿@using MySql.Data.MySqlClient;
-@page "/"
+﻿@page "/login"
+@using MySql.Data.MySqlClient
+@inject NavigationManager NavManager
 
+<h3>Login Page</h3>
+
+<div>
+    <label>UserName:</label>
+    <input type="text" @bind="inputUser" />
+</div>
+<div>
+    <label>Password:</label>
+    <input type="password" @bind="inputPass" />
+</div>
+<button @onclick="CheckLogin">Login</button>
+<button @onclick="InsertU">Create Assigment</button>
+
+
+<p style="color:red">@errorMessage</p>
+
+@code {
+    private string inputUser;
+    private string inputPass;
+    private string errorMessage;
+    private MySqlDataReader r;
+
+    private void CheckLogin()
+    {
+        // הגדרת חיבור
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = "server=localhost;user id=root;password=josh17rog;database=gadhw1;";
+        con.Open();
+
+        // שאילתה לקבלת כל המשתמשים
+        MySqlCommand cmd = new MySqlCommand();
+        cmd.Connection = con;
+        cmd.CommandText = "SELECT * FROM `userdatabase`.`users`;";
+
+        r = cmd.ExecuteReader();
+
+        bool isAuthenticated = false;
+
+        // מעבר על כל המשתמשים בלולאת while
+        while (r.Read())
+        {
+            string dbName = r["Username"].ToString();
+            string dbPass = r["UserPassword"].ToString();
+
+            // בדיקה האם הקלט תואם לאחד המשתמשים בטבלה
+            if (dbName == inputUser && dbPass == inputPass)
+            {
+                isAuthenticated = true;
+                break; // מצאנו משתמש, אפשר לצאת מהלולאה
+            }
+        }
+
+        r.Close();
+        con.Close();
+
+        if (isAuthenticated)
+        {
+            // העברה לדף אחר ל לא שימוש ב-Session או הגנה
+            NavManager.NavigateTo("/AssigmentPage");
+        }
+        else
+        {
+            errorMessage = "שם משתמש או סיסמה שגויים.";
+        }
+    }
+    public void InsertU()
+    {
+        NavManager.NavigateTo("/UserInsert");
+    }
+}

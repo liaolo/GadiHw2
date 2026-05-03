@@ -1,15 +1,46 @@
 ﻿@using MySql.Data.MySqlClient;
 @page "/AssigmentPage"
+@inject NavigationManager NavManager
 
-<button @onclick="Create">Create</button>
+
+<button @onclick="InsertA">Create Assigment</button>
+<button @onclick="DeleteA">Create Assigment</button>
+<button @onclick="SelectA">Create Assigment</button>
+<button @onclick="UpdateA">Create Assigment</button>
+<button @onclick="SelectU">Create Assigment</button>
+<button @onclick="DeleteU">Create Assigment</button>
+<button @onclick="UpdateU">Create Assigment</button>
 
 
-<div> 
-    
-    <a herf="<AssigmentInsert />"> </a>
-    
-</div>
+
 @code
 {
- 
+    public void InsertA()
+    {
+        NavManager.NavigateTo("/AssigmentInsert");
+    }
+    public void DeleteA()
+    {
+        NavManager.NavigateTo("/AssigmentDelete");
+    }
+    public void SelectA()
+    {
+        NavManager.NavigateTo("/AssigmentSelect");
+    }
+    public void UpdateA()
+    {
+        NavManager.NavigateTo("/AssigmentUpdate");
+    }
+    public void SelectU()
+    {
+        NavManager.NavigateTo("/UserSelect");
+    }
+    public void DeleteU()
+    {
+        NavManager.NavigateTo("/UserDelete");
+    }
+    public void UpdateU()
+    {
+        NavManager.NavigateTo("/UserUpdate");
+    }
 }
