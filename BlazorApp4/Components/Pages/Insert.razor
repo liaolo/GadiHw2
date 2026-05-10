@@ -1,9 +1,10 @@
 ﻿@using MySql.Data.MySqlClient;
 @page "/UserInsert"
 
-<input type="password" @bind="pass" placeholder="Enter you password" />
-<input type="text" @bind="email" placeholder="Enter you email" />
 <input type="text" @bind="username" placeholder="Enter you username" />
+<input type="text" @bind="email" placeholder="Enter you email" />
+<input type="password" @bind="pass" placeholder="Enter you password" />
+
 <button @onclick="INSERT">sumbit</button>
 <p>@Message</p>
 

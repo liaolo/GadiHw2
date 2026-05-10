@@ -1,11 +1,11 @@
-﻿@using MySql.Data.MySqlClient;
-@page "/AssigmentInsert"
+﻿@page "/AssigmentInsert"
+@using MySql.Data.MySqlClient;
+
 
 <input type="text" @bind="AName" placeholder="Enter you Assigment Name" />
 <input type="text" @bind="ASubject" placeholder="Enter you Subject Name" />
 <input type="text" @bind="Ddate" placeholder="Enter your assigments Due date" />
-<input type="text" @bind="Ddate" placeholder="Enter notes" />
-<input type="text" @bind="Ddate" placeholder="Enter notes" />
+<input type="text" @bind="ANotes" placeholder="Enter notes" />
 <button @onclick="INSERT">"INSERT"</button>
 <p>@Message</p>
 
@@ -22,19 +22,15 @@
         con.ConnectionString = "server=localhost;user id =root;password=josh17rog;database=gadhw1";
         con.Open();
 
-        string sql = $"INSERT INTO `gadhw1`.`assigments` (`AssigmentName`, `AssigmentsSubject`, `AssigmentsDueDate`,`AssigmentsNotes`) VALUES ('{AName}', '{ASubject}', '{Ddate}', '{ANotes});";
+        string sql = $"INSERT INTO `gadhw1`.`assigments` (`AssignmentName`, `AssignmentsSubject`, `AssignmentsDueDate`,`AssignmentsNotes`) VALUES ('{AName}', '{ASubject}', '{Ddate}', '{ANotes}');";
+
         MySqlCommand cmd = new MySqlCommand();
         cmd.Connection = con;
         cmd.CommandText = sql;
+
         int num = cmd.ExecuteNonQuery();
-        if (num > 0)
-        {
-            Message = "Worked";
-        }
-        else
-        {
-            Message = "No work";
-        }
+        Message = num > 0 ? "Succsesful" : "No nO";
+        con.Close();
     }
 }
 

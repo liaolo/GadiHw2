@@ -22,7 +22,10 @@
         cmd2.Connection = con;
         cmd2.CommandText = Sql2;
         int num = cmd2.ExecuteNonQuery();
-        userid = num > 0 ? "Succesful" : "No No";
+        
+        Message = num > 0 ? "Succesful" : "No No";
+
+        con.Close();
     }
 }
 

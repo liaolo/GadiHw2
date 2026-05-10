@@ -17,7 +17,7 @@
         con.ConnectionString = "server=localhost;user id =root;password=josh17rog;database=gadhw1";
         con.Open();
 
-        string Sql2 = $"DELETE FROM `gadhw1`.`assigments` WHERE(`idAssigment` = '{AssigmentId}');";
+        string Sql2 = $"DELETE FROM `gadhw1`.`assigments` WHERE(`idAssignment` = '{AssigmentId}');";
         MySqlCommand cmd2 = new MySqlCommand();
         cmd2.Connection = con;
         cmd2.CommandText = Sql2;

@@ -1,11 +1,11 @@
 ﻿@using MySql.Data.MySqlClient;
 @page "/AssigmentUpdate"
 
+<input type="password" @bind="AId" placeholder="Assigemnt Id" />
 <input type="text" @bind="AName" placeholder="Update you Assigment Name" />
 <input type="text" @bind="ASubject" placeholder="Update you Subject Name" />
 <input type="text" @bind="Ddate" placeholder="Update your assigments Due date" />
-<input type="text" @bind="Ddate" placeholder="Update notes" />
-<input type="text" @bind="Ddate" placeholder="Update notes" />
+<input type="text" @bind="ANotes" placeholder="Update notes" />
 <button @onclick="UPDATE">"UPDATE"</button>
 <p>@message</p>
 
@@ -23,13 +23,15 @@
         con.ConnectionString = "server=localhost;user id =root;password=josh17rog;database=gadhw1";
         con.Open();
 
-        string Sql3 = $"UPDATE `gadhw1`.`assigments` SET `AssignmentName` = '{AName}', `AssigmentsSubject` = '{ASubject}' , `AssigmentsDueDate` = '{Ddate}' , `AssigmentsNotes` = '{ANotes}'  WHERE(`IdAssigment` = '{AId}')";
+        string Sql3 = $"UPDATE `gadhw1`.`assigments` SET `AssignmentName` = '{AName}', `AssignmentsSubject` = '{ASubject}' , `AssignmentsDueDate` = '{Ddate}' , `AssignmentsNotes` = '{ANotes}'  WHERE(`idAssignment` = '{AId}')";
 
         MySqlCommand cmd3 = new MySqlCommand();
         cmd3.Connection = con;
         cmd3.CommandText = Sql3;
         int num = cmd3.ExecuteNonQuery();
         message = num > 0 ? "Succsesful" : "No nO";
+
+        con.Close();
     }
 }
 

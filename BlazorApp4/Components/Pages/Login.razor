@@ -1,28 +1,35 @@
-﻿@page "/login"
+﻿@page "/"
 @using MySql.Data.MySqlClient
 @inject NavigationManager NavManager
 
 <h3>Login Page</h3>
 
 <div>
-    <label>UserName:</label>
-    <input type="text" @bind="inputUser" />
+    <label>Email:</label>
+    <input type="text" @bind="inputEmail" />
 </div>
 <div>
     <label>Password:</label>
     <input type="password" @bind="inputPass" />
 </div>
 <button @onclick="CheckLogin">Login</button>
-<button @onclick="InsertU">Create Assigment</button>
+<button @onclick="SignUp">SignUp</button>
 
+
+   
 
 <p style="color:red">@errorMessage</p>
 
 @code {
-    private string inputUser;
+    private string inputEmail;
     private string inputPass;
     private string errorMessage;
     private MySqlDataReader r;
+
+    public void SignUp()
+    {
+        NavManager.NavigateTo("/UserInsert");
+    }
 
     private void CheckLogin()
     {
@@ -34,7 +41,7 @@
         // שאילתה לקבלת כל המשתמשים
         MySqlCommand cmd = new MySqlCommand();
         cmd.Connection = con;
-        cmd.CommandText = "SELECT * FROM `userdatabase`.`users`;";
+        cmd.CommandText = "SELECT * FROM `gadhw1`.`userdatabase`;";
 
         r = cmd.ExecuteReader();
 
@@ -43,11 +50,11 @@
         // מעבר על כל המשתמשים בלולאת while
         while (r.Read())
         {
-            string dbName = r["Username"].ToString();
+            string dbEmail = r["UserEmail"].ToString();
             string dbPass = r["UserPassword"].ToString();
 
             // בדיקה האם הקלט תואם לאחד המשתמשים בטבלה
-            if (dbName == inputUser && dbPass == inputPass)
+            if (dbEmail == inputEmail && dbPass == inputPass)
             {
                 isAuthenticated = true;
                 break; // מצאנו משתמש, אפשר לצאת מהלולאה
