@@ -1,17 +1,29 @@
 ﻿@using MySql.Data.MySqlClient;
 @page "/AssigmentPage"
 @inject NavigationManager NavManager
-
-
-<button @onclick="InsertA">Create Assigment</button>
-<button @onclick="DeleteA">Delete Assigment</button>
-<button @onclick="SelectA">Select Assigment</button>
-<button @onclick="UpdateA">Update Assigment</button>
-<button @onclick="SelectU">Select User</button>
-<button @onclick="DeleteU">Delete User</button>
-<button @onclick="UpdateU">Update User</button>
-
-
+<div class="page4-wrap">
+    <div class="page4-card page4-card--hub">
+        <div class="page4-hub">
+            <section class="page4-hub-group" aria-label="Assignments">
+                <div class="page4-badge">ASSIGNMENTS</div>
+                <div class="page4-toolbar page4-toolbar--assign">
+                    <button @onclick="InsertA">Create Assigment</button>
+                    <button @onclick="SelectA">Select Assigment</button>
+                    <button @onclick="UpdateA">Update Assigment</button>
+                    <button @onclick="DeleteA">Delete Assigment</button>
+                </div>
+            </section>
+            <section class="page4-hub-group" aria-label="Users">
+                <div class="page4-badge">USERS</div>
+                <div class="page4-toolbar page4-toolbar--users">
+                    <button @onclick="SelectU">Select User</button>
+                    <button @onclick="UpdateU">Update User</button>
+                    <button @onclick="DeleteU">Delete User</button>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
 
 @code
 {
